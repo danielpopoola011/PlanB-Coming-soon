@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlanBee</title>
+  <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Inter:wght@400;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    /* Honey background wrapper */
+    .bg-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: black;
+    }
+    .bg-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* ensures it fills both desktop + mobile */
+    }
+
+    /* Dark overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5); /* semi-transparent instead of pure black */
+      z-index: -1;
+    }
+
+    /* Bee placeholder */
+    .bee {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 100px;
+      height: auto;
+    }
+
+    /* Coming Soon Button */
+    .center {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .honey-btn {
+      padding: 20px 40px;
+      font-family:"DynaPuff",system-ui;
+      font-size:clamp(2.5rem,3.0vw,1.9rem);
+      font-weight: bold;
+      background: linear-gradient(180deg, #ffca28, #f57c00);
+      border: none;
+      border-radius: 50px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .honey-btn::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 20%, transparent 60%);
+      animation: drip 3s infinite;
+    }
+
+    @keyframes drip {
+      0% { transform: translateY(-100%) rotate(0deg); }
+      100% { transform: translateY(200%) rotate(360deg); }
+    }
+
+    .honey-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* Popup Form */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .popup iframe {
+      width: 90%;
+      max-width: 600px;
+      height: 500px;
+      border-radius: 15px;
+      border: none;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      color: #fff;
+      cursor: pointer;
+    }
+        /* Responsive Styling */
+    @media (max-width: 768px) {
+      body {
+        background-position: center top;
+      }
+      .bg-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: black;
+     }
+
+.bg-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* shows whole GIF but may add black bars */
+  object-position:top;
+}
+
+
+
+      .bee {
+        width: 70px;
+        bottom: 10px;
+        left: 10px;
+      }
+
+      .honey-btn {
+        padding: 15px 30px;
+        font-size: clamp(1.2rem, 6vw, 1.8rem);
+      }
+
+      .popup iframe {
+        width: 95%;
+        height: 400px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+     <!-- Honey GIF Background -->
+  <div class="bg-container">
+    <img src="Honey.gif" alt="Honey Background">
+  </div>
+
+  <div class="overlay"></div>
+
+  <!-- Bee Placeholder -->
+  <img src="bee.png" alt="Bee" class="bee">
+
+  <!-- Coming Soon Button -->
+  <div class="center">
+    <button class="honey-btn" onclick="openForm()">Coming Soon</button>
+  </div>
+
+  <!-- Popup with Google Form -->
+  <div class="popup" id="formPopup">
+    <span class="close-btn" onclick="closeForm()">✖</span>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdFrnOUgVn7M1zN7XbwoErJLjgT79bfv5FX1AILVRp_S49-NQ/viewform?usp=header"></iframe>
+  </div>
+
+  <!-- Background Honey ASMR -->
+  <audio autoplay loop>
+    <source src="honey-asmr.mp3" type="audio/mp3">
+    Your browser does not support audio.
+  </audio>
+
+  <script>
+    function openForm() {
+      document.getElementById("formPopup").style.display = "flex";
+    }
+
+    function closeForm() {
+      document.getElementById("formPopup").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
